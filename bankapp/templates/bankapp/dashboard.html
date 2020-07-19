@@ -2,6 +2,62 @@
 
 {% block content %}
 
-{{ request.user.account.balance }}
+<div id="welcome">
+    <h1>Welcome to SmartBank</h1>
+    <h4>It's nice to meet you {{ request.user.username }}</h4>
+</div>
+
+<section id="info">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Monthly Earnings</h2>
+                    <h2>Rs. {{ request.user.account.balance }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Current Balance</h2>
+                    <h2>Rs. {{ request.user.account.balance }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Balance Spent</h2>
+                    <h2>Rs. {{ request.user.account.balance }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-6">
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Withdraw</h2>
+                    <form>
+                        <input type="number" class="formStyle" placeholder="Amount to be withdrawn"/>
+                        <a href="#" class="formButton">Withdraw</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Deposit</h2>
+                    <form>
+                        <input type="number" class="formStyle" placeholder="Amount to be deposited"/>
+                        <a href="#" class="formButton">Deposit</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

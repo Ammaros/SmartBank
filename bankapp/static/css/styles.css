@@ -1,11 +1,24 @@
+/* Compulsary */
 body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.btn, 
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #3d5af1 !important;
+    border-color: #3d5af1;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Nav */
 #nav {
     background-color: #3d5af1;
 }
 
+/* Welcome */
 #welcome-header {
     padding-top: 8rem;
 }
@@ -23,19 +36,12 @@ body {
     font-weight: 500;
 }
 
-.btn, 
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited,
-.btn-primary:focus {
-    background-color: #3d5af1 !important;
-    border-color: #3d5af1;
-}
+
 
 #landing-button {
     padding-top: 10rem;
     justify-content: center;
-    text-align: center;
+    text-align: center; 
 }
 
 #join-link {
@@ -44,6 +50,7 @@ body {
     text-decoration: none;
 }
 
+/* Login/Signup */
 form {
     padding-top: 2rem;
     width: 550px;
@@ -76,4 +83,75 @@ form {
     color: #3d5af1;
     text-align: center;
     font-weight: 700;
+}
+
+/* Dashboard */
+#welcome {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+#welcome h1 {
+    color: #3d5af1;
+    font-weight: 700;
+}
+
+#info .card {
+    border: 8;
+    border-color: #3d5af1;
+    border-radius: 10px;
+    box-shadow: 0px 0px  6px 0.5px rgba(0, 0, 0, 0.2);
+}
+
+#info .row {
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+#info form {
+    height: 9rem;
+}
+
+.formStyle { 
+    padding: 15px; 
+    width: 500px; 
+    border-bottom-width: 1px; 
+    border-bottom-style: solid; 
+    border-bottom-color: #000000; 
+    border-top-style: none; 
+    border-right-style: none; 
+    border-left-style: none; 
+    font-size: 1em;
+    color: #000000;
+}
+
+.formButton {
+    float: right;
+	background-color:#ffffff;
+	display:inline-block;
+	color:#3d5af1;
+	font-size:25px;
+	font-weight: 500;
+	padding:6px 24px;
+    margin-top: 15px;
+    margin-right: 60px;
+}
+
+.formButton:hover {
+	background-color: #3d5af1;
+  color:#ffffff;
+}
+
+.formButton:active {
+	position:relative;
+	top:3px;
+}
+
+#info a {
+    text-decoration: none;
+}
+
+#info input:focus {
+    outline: none;
 }
