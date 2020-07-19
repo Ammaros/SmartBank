@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <title>SmartBank</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
+
+        <a class="navbar-brand" href="{% url 'welcome-page' %}">SmartBank</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+
+            {% if "/dashboard/" in request.path %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+              </li>
+            {% endif %}
+            
+            {% if "/transfer/" in request.path %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'transfer' %}">Transfer</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'transfer' %}">Transfer</a>
+              </li>
+            {% endif %}
+
+            {% if "/transactions/" in request.path %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'transactions' %}">Transactions</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'transactions' %}">Transactions</a>
+              </li>
+            {% endif %}
+
+          </ul>
+
+          <!-- Right -->
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+
+            {% else %}
+
+              {% if "/login/" in request.path %}
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'login-page' %}">Login</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login-page' %}">Login</a>
+                </li>
+              {% endif %}
+
+              {% if "/signup/" in request.path %}
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'signup-page' %}">Signup</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'signup-page' %}">Signup</a>
+                </li>
+              {% endif %}
+
+            {% endif %}
+          </ul>
+
+        </div>
+      </nav>
+
+      {% block content %}
+
+      {% endblock %}
+
+</body>
+</html>

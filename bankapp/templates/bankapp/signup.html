@@ -1,0 +1,29 @@
+{% extends "bankapp/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1 id="signup-header">Signup</h1>
+<form method="post">
+    {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        {{ form.username|as_crispy_field }}
+        {{ form.email|as_crispy_field }}
+        {{ form.password1|as_crispy_field }}
+        {{ form.password2|as_crispy_field }}
+        {{ accountForm.balance|as_crispy_field }}
+    </div>
+    <div id="signup-btn">
+        <button class="btn btn-primary btn-lg">Sign Up</button>
+        <p class="py-2">Already have an account? Login <a href="{% url 'login-page' %}">here</a></p>
+    </div>
+  </form>
+
+{% endblock %}
