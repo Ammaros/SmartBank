@@ -8,3 +8,6 @@ class Account(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Transaction(models.Model):
+    Amount = models.IntegerField()

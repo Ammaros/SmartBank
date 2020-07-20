@@ -12,8 +12,8 @@
         <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h2>Monthly Earnings</h2>
-                    <h2>Rs. {{ request.user.account.balance }}</h2>
+                    <h2>Transactions</h2>
+                    <h2>1</h2>
                 </div>
             </div>
         </div>
@@ -39,11 +39,12 @@
             <div class="card">
                 <div class="card-body">
                     <h2>Withdraw</h2>
-                    <form>
-                        <input type="number" class="formStyle" placeholder="Amount to be withdrawn"/>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input name="withdraw" type="number" class="formStyle" placeholder="Amount to be withdrawn"/>
                         <div id="btn-w">
                             <button class="btn btn-primary btn-md">
-                                <a href="#">Withdraw</a>
+                                Withdraw
                             </button>
                         </div>
                     </form>
@@ -54,11 +55,12 @@
             <div class="card">
                 <div class="card-body">
                     <h2>Deposit</h2>
-                    <form>
-                        <input type="number" class="formStyle" placeholder="Amount to be deposited"/>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input name="deposit" type="number" class="formStyle" placeholder="Amount to be deposited"/>
                         <div id="btn-d">
                             <button class="btn btn-primary btn-md">
-                                <a href="#">Deposit</a>
+                                Deposit
                             </button>
                         </div>
                     </form>

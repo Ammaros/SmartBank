@@ -55,6 +55,20 @@ def logout_view(request):
 
 @login_required(redirect_field_name='login-page')
 def dashboard(request):
+    if request.method == 'POST':
+        accountForm = AccountForm(request.POST)
+        if accountForm.is_valid():
+            withdrawAmount = request.POST['withdraw']
+            depositAmount = request.POST['withdraw']
+            print(withdrawAmount, depositAmount)
+            account = accountForm.save(commit=False)
+            account.user = user
+            user.account.balance = (user.account.balance - withdrawAmount) + depositAmount
+            account.save()
+            return redirect('dashboard')
+        else:
+            messages.error(request,'Invalid login credentials. Please try agian.')
+            return redirect('dashboard')
     customer = User.objects.all()
     return render(request, 'bankapp/dashboard.html', {'customer': customer})
 
