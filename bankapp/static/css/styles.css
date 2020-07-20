@@ -110,7 +110,7 @@ form {
 }
 
 #info form {
-    height: 9rem;
+    height: 10rem;
 }
 
 .formStyle { 
@@ -126,32 +126,28 @@ form {
     color: #000000;
 }
 
-.formButton {
-    float: right;
-	background-color:#ffffff;
-	display:inline-block;
-	color:#3d5af1;
-	font-size:25px;
-	font-weight: 500;
-	padding:6px 24px;
-    margin-top: 15px;
-    margin-right: 60px;
-}
-
-.formButton:hover {
-	background-color: #3d5af1;
-  color:#ffffff;
-}
-
-.formButton:active {
-	position:relative;
-	top:3px;
-}
-
 #info a {
     text-decoration: none;
 }
 
 #info input:focus {
     outline: none;
+}
+
+#btn-w a {
+    color: white;
+}
+
+#btn-d a {
+    color: white;
+}
+
+#btn-w {
+    padding-top: 1.5rem;
+    padding-left: 2px;
+}
+
+#btn-d {
+    padding-top: 1.5rem;
+    padding-left: 2px;
 }

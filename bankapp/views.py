@@ -55,8 +55,8 @@ def logout_view(request):
 
 @login_required(redirect_field_name='login-page')
 def dashboard(request):
-    user = User.objects.all()
-    return render(request, 'bankapp/dashboard.html', {'user': user})
+    customer = User.objects.all()
+    return render(request, 'bankapp/dashboard.html', {'customer': customer})
 
 @login_required(redirect_field_name='login-page')
 def transfer(request):
