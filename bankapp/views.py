@@ -10,16 +10,22 @@ def welcome(request):
 
 def signup_view(request):
     if request.method == 'POST':
+
         form = SignUpForm(request.POST)
         accountForm = AccountForm(request.POST)
+        
         if form.is_valid() and accountForm.is_valid():
+
             user = form.save()
+
             account = accountForm.save(commit=False)
             account.user = user
             account.save()
+
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
+
             return redirect('login-page')
         else:
            messages.error(request, 'Invalid input or missing fields. Please try again!')
@@ -31,11 +37,15 @@ def signup_view(request):
 
 def login_view(request):
     if request.method == 'POST':
+
         form = AuthenticationForm(data=request.POST)
+
         if form.is_valid():
+
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+
             if user is not None:
                 login(request, user)
                 return redirect('dashboard')
@@ -45,30 +55,45 @@ def login_view(request):
         else:
             messages.error(request,'Invalid login credentials. Please try agian.')
             return redirect('login-page')
+
     form = AuthenticationForm()
     return render(request, 'bankapp/login.html', {'form': form})
 
 def logout_view(request):
+
     logout(request)
     messages.info(request, "Logged out successfully!")
+
     return redirect("login-page")
 
 @login_required(redirect_field_name='login-page')
 def dashboard(request):
     if request.method == 'POST':
-        accountForm = AccountForm(request.POST)
-        if accountForm.is_valid():
-            withdrawAmount = request.POST['withdraw']
-            depositAmount = request.POST['withdraw']
-            print(withdrawAmount, depositAmount)
-            account = accountForm.save(commit=False)
-            account.user = user
-            user.account.balance = (user.account.balance - withdrawAmount) + depositAmount
-            account.save()
+
+        withdrawAmount = request.POST.get('withdraw')
+        depositAmount = request.POST.get('deposit')
+        user = User.objects.get(username=request.user.username)
+
+        if withdrawAmount == None and depositAmount == None:
             return redirect('dashboard')
-        else:
-            messages.error(request,'Invalid login credentials. Please try agian.')
+            messages.info(request, "Amount empty!")
+        elif depositAmount == None:
+
+            user.account.balance = user.account.balance - int(withdrawAmount)
+            user.account.balanceSpent += int(withdrawAmount)
+            user.account.transactions += 1
+            user.account.save()
+
             return redirect('dashboard')
+
+        elif withdrawAmount == None:
+
+            user.account.balance = user.account.balance + int(depositAmount)
+            user.account.transactions += 1
+            user.account.save()
+
+            return redirect('dashboard')
+            
     customer = User.objects.all()
     return render(request, 'bankapp/dashboard.html', {'customer': customer})
 

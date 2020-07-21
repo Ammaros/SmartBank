@@ -13,4 +13,4 @@ class SignUpForm(UserCreationForm):
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('balance',)
+        fields = ('balance', 'transactions', 'balanceSpent',)

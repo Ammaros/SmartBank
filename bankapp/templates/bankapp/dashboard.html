@@ -7,13 +7,19 @@
     <h4>It's nice to meet you {{ request.user.username }}</h4>
 </div>
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+    {% endfor %}
+{% endif %}
+
 <section id="info">
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h2>Transactions</h2>
-                    <h2>1</h2>
+                    <h2>{{ request.user.account.transactions }}</h2>
                 </div>
             </div>
         </div>
@@ -29,7 +35,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2>Balance Spent</h2>
-                    <h2>Rs. {{ request.user.account.balance }}</h2>
+                    <h2>Rs. {{ request.user.account.balanceSpent }}</h2>
                 </div>
             </div>
         </div>
