@@ -7,11 +7,14 @@
     <h4>It's nice to meet you {{ request.user.username }}</h4>
 </div>
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-    {% endfor %}
-{% endif %}
+{% for message in messages %}
+
+    <div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+        {{ message.error }}
+    </div>
+
+{% endfor %}
 
 <section id="info">
     <div class="row">

@@ -31,7 +31,7 @@ body {
 }
 
 #welcome-header-para {
-    font-size: larger;
+    font-size: x-large;
     text-align: center;
     font-weight: 500;
 }
@@ -150,4 +150,23 @@ form {
 #btn-d {
     padding-top: 1.5rem;
     padding-left: 2px;
+}
+
+/* Transder */
+#transfer-header {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    font-size: 4rem;
+    color: #3d5af1;
+    text-align: center;
+    font-weight: 700;
+}
+
+#transfer-btn {
+    text-align: left;
+    padding-top: 1.5rem;
+}
+
+#transfer-inp input:focus {
+    outline: none;
 }

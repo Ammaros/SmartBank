@@ -2,4 +2,21 @@
 
 {% block content %}
 
+<h1 id="transfer-header">Transfer Funds</h1>
+<form method="POST">
+    {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+        {% endfor %}
+    {% endif %}
+    <div id="transfer-inp">
+        <input name="accountUsername" type="text" class="formStyle" placeholder="Input username the destination account"/>
+        <input name="amount" type="number" class="formStyle" placeholder="Amount to be sent"/>
+    </div>
+    <div id="transfer-btn">
+        <button class="btn btn-primary btn-lg">Transfer</button>
+    </div>
+</form>
+
 {% endblock %}

@@ -26,6 +26,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
 
+            messages.info(request, "Account Created Sucessfully! Login.")
             return redirect('login-page')
         else:
            messages.error(request, 'Invalid input or missing fields. Please try again!')
@@ -73,33 +74,92 @@ def dashboard(request):
         withdrawAmount = request.POST.get('withdraw')
         depositAmount = request.POST.get('deposit')
         user = User.objects.get(username=request.user.username)
+        print(withdrawAmount, depositAmount)
 
-        if withdrawAmount == None and depositAmount == None:
+
+        try:
+
+            if depositAmount == None:
+
+                if user.account.balance >= int(withdrawAmount):
+
+                    user.account.balance = user.account.balance - int(withdrawAmount)
+                    user.account.balanceSpent += int(withdrawAmount)
+                    user.account.transactions += 1
+                    user.account.save()
+                    return redirect('dashboard')
+                
+                else:
+
+                    return redirect('dashboard')
+                    messages.error(request, 'Withdraw amount exceeds current balance.')
+
+            elif withdrawAmount == None:
+
+                if int(depositAmount) <= 100000:
+                    
+                    user.account.balance = user.account.balance + int(depositAmount)
+                    user.account.transactions += 1
+                    user.account.save()
+                    return redirect('dashboard')
+                
+                else:
+
+                    return redirect('dashboard')
+                    messages.error(request, 'Can only deposit a mzximum of Rs. 100,000')
+        
+        except ValueError:
+
             return redirect('dashboard')
-            messages.info(request, "Amount empty!")
-        elif depositAmount == None:
+            messages.error(request, 'Invalid Input! Please try again')
 
-            user.account.balance = user.account.balance - int(withdrawAmount)
-            user.account.balanceSpent += int(withdrawAmount)
-            user.account.transactions += 1
-            user.account.save()
-
-            return redirect('dashboard')
-
-        elif withdrawAmount == None:
-
-            user.account.balance = user.account.balance + int(depositAmount)
-            user.account.transactions += 1
-            user.account.save()
-
-            return redirect('dashboard')
             
     customer = User.objects.all()
     return render(request, 'bankapp/dashboard.html', {'customer': customer})
 
 @login_required(redirect_field_name='login-page')
 def transfer(request):
-    return render(request, 'bankapp/transfer.html')
+    if request.method == 'POST':
+
+        destUsername = request.POST.get('accountUsername')
+        transferAmount = request.POST.get('amount')
+        user = User.objects.get(username=request.user.username)
+        transferUser = User.objects.get(username=destUsername)
+
+        try:
+
+            if destUsername != '' or transferAmount != None:
+
+                if user.account.balance >= int(transferAmount) and int(transferAmount) <= 100000:
+
+                    user.account.balance = user.account.balance - int(transferAmount)
+                    user.account.balanceSpent += int(transferAmount)
+                    user.account.transactions += 1
+                    transferUser.account.balance = transferUser.account.balance + int(transferAmount)
+
+                    user.account.save()
+                    transferUser.account.save()
+
+                    return redirect('transfer')
+                    messages.success(request, 'Funds transferred successfully!')
+            
+                else:
+
+                    return redirect('transfer')
+                    messages.error(request, 'Please complete the input fields!')
+
+            else:
+
+                return redirect('transfer')
+                messages.error(request, 'Please complete the input fields!')
+
+        except transferUser.DoesNotExist or ValueError:
+
+            return redirect('transfer')
+            messages.error(request, 'Invalid input a valid Username or Amount!')
+
+    customer = User.objects.all()
+    return render(request, 'bankapp/transfer.html', {'customer': customer})
 
 @login_required(redirect_field_name='login-page')
 def transactions(request):
