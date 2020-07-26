@@ -2,4 +2,12 @@
 
 {% block content %}
 
+<h1 id="transactions-header">Transaction History</h1>
+
+<div id="transactions-list">
+    {% for transaction in request.user.account.history %}
+        <p>{{ transaction }}</p>
+    {% endfor %}
+</div>
+
 {% endblock %}

@@ -5,16 +5,16 @@
 <div id="welcome">
     <h1>Welcome to SmartBank</h1>
     <h4>It's nice to meet you {{ request.user.username }}</h4>
+    {% if messages %}
+        {% for message in messages %}     
+        <div id="alert">  
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
-
-{% for message in messages %}
-
-    <div class="alert alert-success">
-        <a class="close" href="#" data-dismiss="alert">×</a>
-        {{ message.error }}
-    </div>
-
-{% endfor %}
 
 <section id="info">
     <div class="row">
