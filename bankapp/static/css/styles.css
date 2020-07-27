@@ -21,6 +21,7 @@ body {
 /* Welcome */
 #welcome-header {
     padding-top: 8rem;
+    padding-bottom: 3rem;
 }
 
 #welcome-header-title {
@@ -36,18 +37,37 @@ body {
     font-weight: 500;
 }
 
-
-
 #landing-button {
-    padding-top: 10rem;
     justify-content: center;
-    text-align: center; 
+    text-align: center;
+    padding-top: 1rem; 
 }
 
 #join-link {
     color: #ffffff;
     font-weight: 500;
     text-decoration: none;
+}
+
+#features {
+    text-align: center;
+    justify-content: center;
+}
+
+.feature {
+    padding: 2rem;
+    width: 18rem;
+}
+
+.feature h5{
+    color: #3d5af1;
+    font-weight: 700;
+    font-size: larger;
+    padding-bottom: 1rem;
+}
+
+.feature p{
+    font-weight: 500;
 }
 
 /* Login/Signup */

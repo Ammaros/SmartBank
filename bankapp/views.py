@@ -27,12 +27,10 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
 
-            user = User.objects.get(username=request.user.username)
-            user.account.history = user.account.history.remove('')
-            user.account.save()
+            login(request, user)
+            messages.success(request, 'Account successfully created!')
+            return redirect('dashboard')
 
-            messages.info(request, "Account Created Sucessfully! Login.")
-            return redirect('login-page')
         else:
            messages.warning(request, 'Invalid input or missing fields. Please try again!')
            return redirect('signup-page') 

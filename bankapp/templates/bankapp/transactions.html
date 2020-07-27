@@ -4,8 +4,18 @@
 
 <h1 id="transactions-header">Transaction History</h1>
 
+{% if messages %}
+    {% for message in messages %}     
+    <div id="alert">  
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
 <div id="transactions-list">
-    {% for transaction in request.user.account.history %}
+    {% for transaction in request.user.account.history reversed %}
         <p>{{ transaction }}</p>
     {% endfor %}
 </div>

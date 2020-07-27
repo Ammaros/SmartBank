@@ -2,23 +2,24 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-<h1 id="login-header">Login</h1>
-<form method="post">
-    {% csrf_token %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-        {% endfor %}
-    {% endif %}
-    <div>
-        {{ form.username|as_crispy_field }}
-        {{ form.password|as_crispy_field }}
-    </div>
-    <div id="login-btn">
-        <button class="btn btn-primary btn-lg">Login</button>
-        <p class="py-2">Don't have an account? Create one <a href="{% url 'signup-page' %}">here</a></p>
-    </div>
-</form>
+<div class="col-md col-xs">
+    <h1 id="login-header">Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+            {% endfor %}
+        {% endif %}
+        <div>
+            {{ form.username|as_crispy_field }}
+            {{ form.password|as_crispy_field }}
+        </div>
+        <div id="login-btn">
+            <button class="btn btn-primary btn-lg">Login</button>
+            <p class="py-2">Don't have an account? Create one <a href="{% url 'signup-page' %}">here</a></p>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

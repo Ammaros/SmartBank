@@ -3,14 +3,32 @@
 {% block content %}
 
 <!-- Landing -->
-<div id="welcome-header">
-    <h1 id="welcome-header-title">Now Even Smarter</h1>
-    <p id="welcome-header-para">Online banking made easier and hassel free. Join millions today!</p>
-</div>
-<div id="landing-button">
-    <button class="btn btn-primary btn-lg">
-        <a id="join-link" href="{% url 'signup-page' %}">Join Today</a>
-    </button>
+<div class="col-md col-xs">
+    <div id="welcome-header">
+        <h1 id="welcome-header-title">Now Even Smarter</h1>
+        <p id="welcome-header-para">Online banking made easier and hassle free. Join millions today!</p>
+    </div>
+
+    <div id="features" class="row">
+        <div class="feature">
+            <h5>Quick Transactions</h5>
+            <p>One-click transactions to pay your bills and recieve money from anywhere in the world</p>
+        </div>
+        <div class="feature">
+            <h5>Easy Funds Transfer</h5>
+            <p>One-step speedy fund transfers to your loved ones and employees across the entire globe</p>
+        </div>
+        <div class="feature">
+            <h5>Transaction History</h5>
+            <p>A complete view of the your recent 10 transactions sorted by your lastest activity</p>
+        </div>
+    </div>
+
+    <div id="landing-button">
+        <button class="btn btn-primary btn-lg">
+            <a id="join-link" href="{% url 'signup-page' %}">Join Today</a>
+        </button>
+    </div>
 </div>
 
 {% endblock %}
